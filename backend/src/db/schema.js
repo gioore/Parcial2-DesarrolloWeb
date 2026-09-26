@@ -133,6 +133,121 @@ const vehicles = [
       "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=1200&q=80",
       "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80"
     ]
+  },
+  {
+    ownerEmail: "carlos.demo@umg.edu.gt",
+    year: 2022,
+    articleType: "Automovil",
+    brand: "Mazda",
+    model: "3 Sedan",
+    engine: "2.5L",
+    transmission: "Automatica",
+    fuelType: "Gasolina",
+    drivetrain: "FWD",
+    cylinders: 4,
+    damageLevel: "Verde",
+    basePrice: 23500,
+    startsOffsetMinutes: -60,
+    endsOffsetMinutes: 420,
+    photos: [
+      "https://images.unsplash.com/photo-1623869675781-80aa31012a5a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80"
+    ]
+  },
+  {
+    ownerEmail: "andrea.demo@umg.edu.gt",
+    year: 2023,
+    articleType: "SUV",
+    brand: "Kia",
+    model: "Sportage LX",
+    engine: "2.0L",
+    transmission: "Automatica",
+    fuelType: "Hibrido",
+    drivetrain: "AWD",
+    cylinders: 4,
+    damageLevel: "Verde",
+    basePrice: 28500,
+    startsOffsetMinutes: -15,
+    endsOffsetMinutes: 480,
+    photos: [
+      "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1200&q=80"
+    ]
+  },
+  {
+    ownerEmail: "marvin.demo@umg.edu.gt",
+    year: 2018,
+    articleType: "Motocicleta",
+    brand: "Yamaha",
+    model: "MT-07",
+    engine: "689cc",
+    transmission: "Manual",
+    fuelType: "Gasolina",
+    drivetrain: "RWD",
+    cylinders: 2,
+    damageLevel: "Amarillo",
+    basePrice: 7800,
+    startsOffsetMinutes: -45,
+    endsOffsetMinutes: 540,
+    photos: [
+      "https://images.unsplash.com/photo-1623869675781-80aa31012a5a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80"
+    ]
+  },
+  {
+    ownerEmail: "carlos.demo@umg.edu.gt",
+    year: 2020,
+    articleType: "Camion",
+    brand: "Isuzu",
+    model: "NPR HD",
+    engine: "5.2L Diesel",
+    transmission: "Manual",
+    fuelType: "Diesel",
+    drivetrain: "RWD",
+    cylinders: 4,
+    damageLevel: "Rojo",
+    basePrice: 42000,
+    startsOffsetMinutes: -20,
+    endsOffsetMinutes: 600,
+    photos: [
+      "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1551830820-330a71b99659?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1200&q=80"
+    ]
+  },
+  {
+    ownerEmail: "andrea.demo@umg.edu.gt",
+    year: 2021,
+    articleType: "Automovil",
+    brand: "Nissan",
+    model: "Leaf SV",
+    engine: "Electrico 110kW",
+    transmission: "Automatica",
+    fuelType: "Electrico",
+    drivetrain: "FWD",
+    cylinders: 0,
+    damageLevel: "Amarillo",
+    basePrice: 19000,
+    startsOffsetMinutes: -10,
+    endsOffsetMinutes: 660,
+    photos: [
+      "https://images.unsplash.com/photo-1623869675781-80aa31012a5a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=1200&q=80"
+    ]
   }
 ];
 
@@ -153,21 +268,22 @@ export async function initializeDatabase({ reset = false } = {}) {
   const count = await pool
     .request()
     .query("SELECT COUNT(*) AS total FROM dbo.Copart7082Users");
-  if (count.recordset[0].total > 0) return;
 
-  for (const [firstName, lastName, email, phone, password] of users) {
-    const passwordHash = await bcrypt.hash(password, 10);
-    await pool
-      .request()
-      .input("firstName", sql.NVarChar, firstName)
-      .input("lastName", sql.NVarChar, lastName)
-      .input("email", sql.NVarChar, email)
-      .input("phone", sql.NVarChar, phone)
-      .input("passwordHash", sql.NVarChar, passwordHash)
-      .query(`
-        INSERT INTO dbo.Copart7082Users (firstName, lastName, email, phone, passwordHash)
-        VALUES (@firstName, @lastName, @email, @phone, @passwordHash)
-      `);
+  if (count.recordset[0].total === 0) {
+    for (const [firstName, lastName, email, phone, password] of users) {
+      const passwordHash = await bcrypt.hash(password, 10);
+      await pool
+        .request()
+        .input("firstName", sql.NVarChar, firstName)
+        .input("lastName", sql.NVarChar, lastName)
+        .input("email", sql.NVarChar, email)
+        .input("phone", sql.NVarChar, phone)
+        .input("passwordHash", sql.NVarChar, passwordHash)
+        .query(`
+          INSERT INTO dbo.Copart7082Users (firstName, lastName, email, phone, passwordHash)
+          VALUES (@firstName, @lastName, @email, @phone, @passwordHash)
+        `);
+    }
   }
 
   for (const vehicle of vehicles) {
@@ -175,6 +291,13 @@ export async function initializeDatabase({ reset = false } = {}) {
       .request()
       .input("email", sql.NVarChar, vehicle.ownerEmail)
       .query("SELECT id FROM dbo.Copart7082Users WHERE email = @email");
+
+    const existing = await pool
+      .request()
+      .input("brand", sql.NVarChar, vehicle.brand)
+      .input("model", sql.NVarChar, vehicle.model)
+      .query("SELECT TOP 1 id FROM dbo.Copart7082Vehicles WHERE brand = @brand AND model = @model");
+    if (existing.recordset.length) continue;
 
     const startsAt = new Date(Date.now() + vehicle.startsOffsetMinutes * 60_000);
     const endsAt = new Date(Date.now() + vehicle.endsOffsetMinutes * 60_000);

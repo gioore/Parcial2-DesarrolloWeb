@@ -127,6 +127,7 @@ export function InventoryPage() {
           Cilindros
           <select value={filters.cylinders} onChange={(event) => update("cylinders", event.target.value)}>
             <option value="">Todos</option>
+            <option value="2">2 cilindros</option>
             <option value="3">3 cilindros</option>
             <option value="4">4 cilindros</option>
             <option value="6">6 cilindros</option>
@@ -168,7 +169,7 @@ export function InventoryPage() {
           <div className="empty-state">
             <h2>No encontramos vehiculos</h2>
             <p className="muted">Prueba con otros criterios o limpia los filtros para ver todo el inventario.</p>
-            <button className="ghost-button" onClick={clearFilters}><RotateCcw size={17} /> Limpiar filtros</button>
+            <button type="button" className="ghost-button" onClick={clearFilters}><RotateCcw size={17} /> Limpiar filtros</button>
           </div>
         )
       )}

@@ -70,6 +70,21 @@ export async function seedDemoStore() {
     },
     {
       id: nextVehicleId++, ownerId: 3, year: 2019, articleType: "Pickup", brand: "Ford", model: "F-150 XLT", engine: "3.5L V6", transmission: "Automatica", fuelType: "Gasolina", drivetrain: "4WD", cylinders: 6, damageLevel: "Rojo", basePrice: 30000, startsAt: new Date(now - 1800000), endsAt: new Date(now + 21600000), photos
+    },
+    {
+      id: nextVehicleId++, ownerId: 1, year: 2022, articleType: "Automovil", brand: "Mazda", model: "3 Sedan", engine: "2.5L", transmission: "Automatica", fuelType: "Gasolina", drivetrain: "FWD", cylinders: 4, damageLevel: "Verde", basePrice: 23500, startsAt: new Date(now - 3600000), endsAt: new Date(now + 25200000), photos: photos.slice(1).concat(photos[0])
+    },
+    {
+      id: nextVehicleId++, ownerId: 2, year: 2023, articleType: "SUV", brand: "Kia", model: "Sportage LX", engine: "2.0L", transmission: "Automatica", fuelType: "Hibrido", drivetrain: "AWD", cylinders: 4, damageLevel: "Verde", basePrice: 28500, startsAt: new Date(now - 900000), endsAt: new Date(now + 28800000), photos: photos.slice(2).concat(photos.slice(0, 2))
+    },
+    {
+      id: nextVehicleId++, ownerId: 3, year: 2018, articleType: "Motocicleta", brand: "Yamaha", model: "MT-07", engine: "689cc", transmission: "Manual", fuelType: "Gasolina", drivetrain: "RWD", cylinders: 2, damageLevel: "Amarillo", basePrice: 7800, startsAt: new Date(now - 2700000), endsAt: new Date(now + 32400000), photos: photos.slice().reverse()
+    },
+    {
+      id: nextVehicleId++, ownerId: 1, year: 2020, articleType: "Camion", brand: "Isuzu", model: "NPR HD", engine: "5.2L Diesel", transmission: "Manual", fuelType: "Diesel", drivetrain: "RWD", cylinders: 4, damageLevel: "Rojo", basePrice: 42000, startsAt: new Date(now - 1200000), endsAt: new Date(now + 36000000), photos: photos.slice(1).concat(photos[0])
+    },
+    {
+      id: nextVehicleId++, ownerId: 2, year: 2021, articleType: "Automovil", brand: "Nissan", model: "Leaf SV", engine: "Electrico 110kW", transmission: "Automatica", fuelType: "Electrico", drivetrain: "FWD", cylinders: 0, damageLevel: "Amarillo", basePrice: 19000, startsAt: new Date(now - 600000), endsAt: new Date(now + 39600000), photos: photos.slice(2).concat(photos.slice(0, 2))
     }
   );
 }

@@ -119,8 +119,9 @@ El proyecto debe desplegarse como dos servicios en Render: un Web Service para e
 backend y un Static Site para el frontend. Socket.IO requiere que el backend sea
 un proceso persistente; no debe desplegarse como función serverless.
 
-También puedes usar el archivo `render.yaml` desde **New > Blueprint** en Render.
-Si lo configuras manualmente, sigue estos pasos.
+Si en tu panel no aparece **Blueprint**, configura los dos servicios manualmente
+con los pasos siguientes. El archivo `render.yaml` queda disponible para cuentas
+que sí tengan habilitada esa opción.
 
 ### Backend como Web Service
 

@@ -1,4 +1,4 @@
-import { SlidersHorizontal } from "lucide-react";
+import { RotateCcw, Search, SlidersHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
 import { api } from "../api/client";
 import { VehicleCard } from "../components/VehicleCard";
@@ -7,7 +7,11 @@ const emptyFilters = {
   brand: "",
   model: "",
   year: "",
+  articleType: "",
   fuelType: "",
+  transmission: "",
+  drivetrain: "",
+  cylinders: "",
   damageLevel: ""
 };
 
@@ -17,12 +21,12 @@ export function InventoryPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  async function load() {
+  async function load(nextFilters = filters) {
     setLoading(true);
     setError("");
     try {
       const params = new URLSearchParams(
-        Object.fromEntries(Object.entries(filters).filter(([, value]) => value))
+        Object.fromEntries(Object.entries(nextFilters).filter(([, value]) => value))
       );
       const data = await api(`/api/vehicles?${params.toString()}`);
       setVehicles(data.vehicles);
@@ -34,12 +38,19 @@ export function InventoryPage() {
   }
 
   useEffect(() => {
-    load();
+    load(emptyFilters);
   }, []);
 
   function update(name, value) {
     setFilters((current) => ({ ...current, [name]: value }));
   }
+
+  function clearFilters() {
+    setFilters(emptyFilters);
+    load(emptyFilters);
+  }
+
+  const activeFilterCount = Object.values(filters).filter(Boolean).length;
 
   return (
     <section className="page">
@@ -51,22 +62,76 @@ export function InventoryPage() {
         </div>
       </div>
 
-      <form className="filters" onSubmit={(event) => { event.preventDefault(); load(); }}>
+      <form className="filter-panel" onSubmit={(event) => { event.preventDefault(); load(); }}>
+        <div className="filter-heading">
+          <div>
+            <h2><SlidersHorizontal size={19} /> Filtrar inventario</h2>
+            <p className="muted">Combina varios criterios para encontrar el vehiculo ideal.</p>
+          </div>
+          {activeFilterCount > 0 && <span className="filter-count">{activeFilterCount} activos</span>}
+        </div>
+        <div className="filters">
         <label>
           Marca
-          <input value={filters.brand} onChange={(event) => update("brand", event.target.value)} />
+          <input value={filters.brand} onChange={(event) => update("brand", event.target.value)} placeholder="Ej. Toyota" />
         </label>
         <label>
           Modelo
-          <input value={filters.model} onChange={(event) => update("model", event.target.value)} />
+          <input value={filters.model} onChange={(event) => update("model", event.target.value)} placeholder="Ej. Corolla" />
         </label>
         <label>
           Año
-          <input type="number" value={filters.year} onChange={(event) => update("year", event.target.value)} />
+          <input type="number" min="1900" max="2100" value={filters.year} onChange={(event) => update("year", event.target.value)} placeholder="Ej. 2021" />
+        </label>
+        <label>
+          Tipo de articulo
+          <select value={filters.articleType} onChange={(event) => update("articleType", event.target.value)}>
+            <option value="">Todos</option>
+            <option>Automovil</option>
+            <option>SUV</option>
+            <option>Pickup</option>
+            <option>Motocicleta</option>
+            <option>Camion</option>
+          </select>
         </label>
         <label>
           Combustible
-          <input value={filters.fuelType} onChange={(event) => update("fuelType", event.target.value)} />
+          <select value={filters.fuelType} onChange={(event) => update("fuelType", event.target.value)}>
+            <option value="">Todos</option>
+            <option>Gasolina</option>
+            <option>Diesel</option>
+            <option>Hibrido</option>
+            <option>Electrico</option>
+          </select>
+        </label>
+        <label>
+          Transmision
+          <select value={filters.transmission} onChange={(event) => update("transmission", event.target.value)}>
+            <option value="">Todas</option>
+            <option>Automatica</option>
+            <option>Manual</option>
+            <option>CVT</option>
+          </select>
+        </label>
+        <label>
+          Tren de manejo
+          <select value={filters.drivetrain} onChange={(event) => update("drivetrain", event.target.value)}>
+            <option value="">Todos</option>
+            <option>FWD</option>
+            <option>RWD</option>
+            <option>AWD</option>
+            <option>4WD</option>
+          </select>
+        </label>
+        <label>
+          Cilindros
+          <select value={filters.cylinders} onChange={(event) => update("cylinders", event.target.value)}>
+            <option value="">Todos</option>
+            <option value="3">3 cilindros</option>
+            <option value="4">4 cilindros</option>
+            <option value="6">6 cilindros</option>
+            <option value="8">8 cilindros</option>
+          </select>
         </label>
         <label>
           Daño
@@ -77,19 +142,35 @@ export function InventoryPage() {
             <option>Rojo</option>
           </select>
         </label>
-        <button className="primary-button">
-          <SlidersHorizontal size={18} />
-          Filtrar
-        </button>
+        </div>
+        <div className="filter-actions">
+          <span className="muted"><Search size={16} /> {vehicles.length} resultados encontrados</span>
+          <div>
+            <button type="button" className="ghost-button" onClick={clearFilters} disabled={!activeFilterCount}>
+              <RotateCcw size={17} /> Limpiar
+            </button>
+            <button className="primary-button" disabled={loading}>
+              <SlidersHorizontal size={18} /> {loading ? "Buscando..." : "Aplicar filtros"}
+            </button>
+          </div>
+        </div>
       </form>
 
       {error && <p className="error">{error}</p>}
       {loading ? (
         <p className="muted">Cargando inventario...</p>
       ) : (
-        <div className="vehicle-grid">
-          {vehicles.map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)}
-        </div>
+        vehicles.length ? (
+          <div className="vehicle-grid">
+            {vehicles.map((vehicle) => <VehicleCard key={vehicle.id} vehicle={vehicle} />)}
+          </div>
+        ) : (
+          <div className="empty-state">
+            <h2>No encontramos vehiculos</h2>
+            <p className="muted">Prueba con otros criterios o limpia los filtros para ver todo el inventario.</p>
+            <button className="ghost-button" onClick={clearFilters}><RotateCcw size={17} /> Limpiar filtros</button>
+          </div>
+        )
       )}
     </section>
   );

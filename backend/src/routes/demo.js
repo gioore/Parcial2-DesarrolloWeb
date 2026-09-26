@@ -102,7 +102,11 @@ export function createDemoRouters(express, io) {
       return (!req.query.brand || vehicle.brand.toLowerCase().includes(String(req.query.brand).toLowerCase())) &&
         (!req.query.model || vehicle.model.toLowerCase().includes(String(req.query.model).toLowerCase())) &&
         (!req.query.year || vehicle.year === Number(req.query.year)) &&
+        (!req.query.articleType || vehicle.articleType.toLowerCase().includes(String(req.query.articleType).toLowerCase())) &&
         (!req.query.fuelType || vehicle.fuelType.toLowerCase().includes(String(req.query.fuelType).toLowerCase())) &&
+        (!req.query.transmission || vehicle.transmission.toLowerCase().includes(String(req.query.transmission).toLowerCase())) &&
+        (!req.query.drivetrain || vehicle.drivetrain === req.query.drivetrain) &&
+        (!req.query.cylinders || vehicle.cylinders === Number(req.query.cylinders)) &&
         (!req.query.damageLevel || vehicle.damageLevel === req.query.damageLevel);
     });
     res.json({ vehicles: filtered.map((vehicle) => withAuction(vehicle, currentUserId)) });

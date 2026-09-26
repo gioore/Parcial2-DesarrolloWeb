@@ -30,7 +30,7 @@ function mapVehicle(row, currentUserId = null) {
 
 vehiclesRouter.get("/", optionalAuth, async (req, res, next) => {
   try {
-    const { brand, model, year, fuelType, damageLevel } = req.query;
+    const { brand, model, year, articleType, fuelType, transmission, drivetrain, cylinders, damageLevel } = req.query;
     const pool = await getPool();
     const request = pool.request();
     const where = [];
@@ -47,9 +47,25 @@ vehiclesRouter.get("/", optionalAuth, async (req, res, next) => {
       request.input("year", sql.Int, Number(year));
       where.push("v.year = @year");
     }
+    if (articleType) {
+      request.input("articleType", sql.NVarChar, `%${articleType}%`);
+      where.push("v.articleType LIKE @articleType");
+    }
     if (fuelType) {
       request.input("fuelType", sql.NVarChar, `%${fuelType}%`);
       where.push("v.fuelType LIKE @fuelType");
+    }
+    if (transmission) {
+      request.input("transmission", sql.NVarChar, `%${transmission}%`);
+      where.push("v.transmission LIKE @transmission");
+    }
+    if (drivetrain) {
+      request.input("drivetrain", sql.NVarChar, drivetrain);
+      where.push("v.drivetrain = @drivetrain");
+    }
+    if (cylinders) {
+      request.input("cylinders", sql.Int, Number(cylinders));
+      where.push("v.cylinders = @cylinders");
     }
     if (damageLevel) {
       request.input("damageLevel", sql.NVarChar, damageLevel);

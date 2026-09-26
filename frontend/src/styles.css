@@ -186,12 +186,79 @@ h2 {
   color: #22643d;
 }
 
+.filter-panel {
+  background: #ffffff;
+  border: 1px solid #dce5e2;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  padding: 18px;
+}
+
+.filter-heading,
+.filter-actions,
+.filter-actions > div {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.filter-heading,
+.filter-actions {
+  justify-content: space-between;
+}
+
+.filter-heading {
+  margin-bottom: 16px;
+}
+
+.filter-heading h2 {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.filter-heading p {
+  margin-bottom: 0;
+}
+
+.filter-count {
+  background: #e6f6ee;
+  border-radius: 999px;
+  color: #22643d;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 6px 10px;
+}
+
 .filters {
   align-items: end;
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  margin-bottom: 24px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 18px;
+}
+
+.filter-actions .muted {
+  align-items: center;
+  display: inline-flex;
+  gap: 6px;
+}
+
+.filter-actions button + button {
+  margin-left: 8px;
+
+}
+
+.empty-state {
+  align-items: center;
+  background: #ffffff;
+  border: 1px dashed #b9ccc7;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 20px;
+  text-align: center;
 }
 
 label {
@@ -499,6 +566,10 @@ select:focus {
   .photos-section {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 680px) {
@@ -523,6 +594,20 @@ select:focus {
   .photos-section,
   .bid-form {
     grid-template-columns: 1fr;
+  }
+
+  .filter-heading,
+  .filter-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .filter-actions > div {
+    width: 100%;
+  }
+
+  .filter-actions > div button {
+    flex: 1;
   }
 
   h1 {

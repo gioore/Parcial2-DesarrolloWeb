@@ -31,11 +31,31 @@ Parcial2-DesarrolloWeb/
 
 ## Usuarios de prueba
 
+Estos usuarios son creados por el backend al inicializar las tablas si todavía
+no existen usuarios. Los tres pueden utilizarse simultáneamente en navegadores
+distintos para comprobar el tiempo real.
+
 | Correo | Contraseña |
 |---|---|
 | carlos.demo@umg.edu.gt | Demo2026! |
 | andrea.demo@umg.edu.gt | Demo2026! |
 | marvin.demo@umg.edu.gt | Demo2026! |
+
+## Prueba rápida de la subasta
+
+1. Abre el sitio en dos ventanas o navegadores diferentes.
+2. Inicia sesión en cada navegador con usuarios de prueba distintos.
+3. Entra al mismo vehículo desde ambos navegadores.
+4. Desde el primer navegador realiza una puja igual o mayor al monto mínimo.
+5. Verifica que la segunda ventana actualice el monto sin recargar la página.
+6. Desde el segundo navegador realiza una puja que supere la actual por al menos 10%.
+7. Comprueba que el primer navegador muestre "Tu oferta ha sido superada" y el segundo
+   muestre "Vas ganando esta subasta".
+8. Prueba una oferta menor al mínimo y otra después de la hora de cierre; ambas deben
+   ser rechazadas por la API.
+
+Los postores se muestran de forma anónima. Solo se muestra el monto y el estado de
+la puja del usuario autenticado.
 
 ## Ejecucion local
 
@@ -99,6 +119,9 @@ El proyecto debe desplegarse como dos servicios en Render: un Web Service para e
 backend y un Static Site para el frontend. Socket.IO requiere que el backend sea
 un proceso persistente; no debe desplegarse como función serverless.
 
+También puedes usar el archivo `render.yaml` desde **New > Blueprint** en Render.
+Si lo configuras manualmente, sigue estos pasos.
+
 ### Backend como Web Service
 
 - Root Directory: `backend`
@@ -115,12 +138,23 @@ un proceso persistente; no debe desplegarse como función serverless.
 - Publish Directory: `dist`
 - Agregar `VITE_API_URL` con la URL pública del backend.
 
-Después del despliegue, verificar `https://URL-DEL-BACKEND/health` y probar el
-login desde dos navegadores con los usuarios de prueba.
+### Orden recomendado
+
+1. Crea primero el Web Service del backend.
+2. Configura sus variables de entorno y espera que `/health` responda `200`.
+3. Crea el Static Site del frontend.
+4. Copia la URL del frontend en `CLIENT_URL` del backend.
+5. Copia la URL del backend en `VITE_API_URL` del frontend.
+6. Haz un nuevo deploy de ambos servicios.
+7. Verifica `https://URL-DEL-BACKEND/health`.
+8. Ejecuta la prueba rápida de la subasta con dos navegadores.
+
+En Render, el backend debe usar `PORT` asignado por Render si se configura
+automáticamente; no se debe fijar a `4000` en producción.
 
 ## Estado de entrega
 
-- URL publicada: pendiente de configurar en Render.
+- URL publicada: agregar aquí la URL pública del Static Site después del deploy.
 - API: `/health`, `/api/auth`, `/api/vehicles` y `/api/bids`.
 - Tiempo real: Socket.IO en el Web Service del backend.
 - Las credenciales SQL se configuran únicamente en Render y en `backend/.env` local.

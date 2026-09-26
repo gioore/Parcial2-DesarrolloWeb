@@ -155,7 +155,8 @@ automáticamente; no se debe fijar a `4000` en producción.
 
 ## Estado de entrega
 
-- URL publicada: agregar aquí la URL pública del Static Site después del deploy.
+- URL publicada: https://parcial2-desarrolloweb-1.onrender.com/
+- Repositorio: https://github.com/gioore/Parcial2-DesarrolloWeb
 - API: `/health`, `/api/auth`, `/api/vehicles` y `/api/bids`.
 - Tiempo real: Socket.IO en el Web Service del backend.
 - Las credenciales SQL se configuran únicamente en Render y en `backend/.env` local.

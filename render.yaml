@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: copart-umg-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLIENT_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_SERVER
+        sync: false
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_PORT
+        value: 1433
+      - key: DB_ENCRYPT
+        value: true
+      - key: DB_TRUST_SERVER_CERTIFICATE
+        value: true
+
+  - type: static_site
+    name: copart-umg-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        sync: false

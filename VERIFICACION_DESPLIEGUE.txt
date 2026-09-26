@@ -1,0 +1,53 @@
+VERIFICACION DE DESPLIEGUE - COPART UMG SUBASTAS
+Fecha: 2026-09-26
+
+URLS PUBLICADAS
+Frontend: https://parcial2-desarrolloweb-1.onrender.com/
+Backend:  https://parcial2-desarrolloweb-t6jd.onrender.com/
+Health:   https://parcial2-desarrolloweb-t6jd.onrender.com/health
+
+RESULTADOS DE PRUEBAS
+[OK] Frontend publico: HTTP 200.
+[OK] Backend health: HTTP 200.
+[OK] Health response: {"ok":true,"service":"copart-umg-backend"}.
+[OK] GET /api/vehicles: responde el inventario.
+[OK] GET /api/vehicles/1: responde el detalle.
+[OK] CORS: permite exactamente https://parcial2-desarrolloweb-1.onrender.com.
+[OK] Login de Carlos: correcto.
+[OK] Login de Andrea: correcto.
+[OK] Login de Marvin: correcto.
+[OK] GET /api/vehicles/mine sin token: responde HTTP 401.
+[OK] Oferta invalida de Q. 1: responde HTTP 400 y no inserta la puja.
+[OK] Vehiculo publicado: Toyota Corolla SE.
+[OK] Galeria corregida: 5 fotografias.
+[OK] Historial de pujas: endpoint disponible.
+[OK] Socket.IO: handshake WebSocket conectado correctamente.
+
+USUARIOS DE PRUEBA
+Correo: carlos.demo@umg.edu.gt
+Correo: andrea.demo@umg.edu.gt
+Correo: marvin.demo@umg.edu.gt
+Contraseña para los tres: Demo2026!
+
+PRUEBA DE TIEMPO REAL
+1. Abrir el frontend en dos navegadores.
+2. Iniciar sesion con dos usuarios diferentes.
+3. Entrar al mismo vehiculo.
+4. Crear una puja valida desde un navegador.
+5. Confirmar que el segundo navegador actualiza la oferta sin F5.
+6. Crear una puja superior desde el segundo navegador.
+7. Confirmar los estados "Vas ganando" y "Tu oferta ha sido superada".
+
+BASE DE DATOS
+Base: db_WebDevUMG
+Tablas del proyecto verificadas:
+- Copart7082Users
+- Copart7082Vehicles
+- Copart7082VehiclePhotos
+- Copart7082Bids
+
+OBSERVACIONES
+- La base desplegada tenia inicialmente una galeria de 3 fotos; se corrigio a 5.
+- No se creo ninguna puja real durante esta verificacion.
+- El archivo temporal write-test.tmp fue eliminado.
+- Las credenciales de SQL no se incluyen en este informe.

@@ -402,7 +402,9 @@ select:focus {
   background: #dce5e2;
   border-radius: 8px;
   display: block;
+  height: auto;
   max-height: 560px;
+  width: 100%;
 }
 
 .thumb-row {

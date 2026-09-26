@@ -57,7 +57,7 @@ export function InventoryPage() {
       <div className="page-heading">
         <div>
           <p className="eyebrow">Subastas activas</p>
-          <h1>Inventario de vehiculos</h1>
+          <h1>Inventario de vehículos</h1>
           <p className="muted">Explora, filtra y entra a una subasta en tiempo real.</p>
         </div>
       </div>
@@ -66,7 +66,7 @@ export function InventoryPage() {
         <div className="filter-heading">
           <div>
             <h2><SlidersHorizontal size={19} /> Filtrar inventario</h2>
-            <p className="muted">Combina varios criterios para encontrar el vehiculo ideal.</p>
+            <p className="muted">Combina varios criterios para encontrar el vehículo ideal.</p>
           </div>
           {activeFilterCount > 0 && <span className="filter-count">{activeFilterCount} activos</span>}
         </div>
@@ -84,7 +84,7 @@ export function InventoryPage() {
           <input type="number" min="1900" max="2100" value={filters.year} onChange={(event) => update("year", event.target.value)} placeholder="Ej. 2021" />
         </label>
         <label>
-          Tipo de articulo
+          Tipo de artículo
           <select value={filters.articleType} onChange={(event) => update("articleType", event.target.value)}>
             <option value="">Todos</option>
             <option>Automovil</option>
@@ -105,7 +105,7 @@ export function InventoryPage() {
           </select>
         </label>
         <label>
-          Transmision
+          Transmisión
           <select value={filters.transmission} onChange={(event) => update("transmission", event.target.value)}>
             <option value="">Todas</option>
             <option>Automatica</option>
@@ -167,7 +167,7 @@ export function InventoryPage() {
           </div>
         ) : (
           <div className="empty-state">
-            <h2>No encontramos vehiculos</h2>
+            <h2>No encontramos vehículos</h2>
             <p className="muted">Prueba con otros criterios o limpia los filtros para ver todo el inventario.</p>
             <button type="button" className="ghost-button" onClick={clearFilters}><RotateCcw size={17} /> Limpiar filtros</button>
           </div>

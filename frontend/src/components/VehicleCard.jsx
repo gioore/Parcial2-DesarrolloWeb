@@ -1,4 +1,5 @@
 import { Clock, Gauge, Image, Tag } from "lucide-react";
+import { displayImageUrl } from "../utils/images";
 import { Countdown } from "./Countdown";
 
 const damageClass = {
@@ -11,7 +12,7 @@ export function VehicleCard({ vehicle }) {
   return (
     <article className="vehicle-card">
       <div className="card-media">
-        <img src={vehicle.photos[0]} alt={`${vehicle.brand} ${vehicle.model}`} />
+        <img src={displayImageUrl(vehicle.photos[0], 700)} alt={`${vehicle.brand} ${vehicle.model}`} loading="lazy" />
         <span className={`damage-pill ${damageClass[vehicle.damageLevel]}`}>{vehicle.damageLevel}</span>
       </div>
       <div className="card-body">

@@ -1,6 +1,12 @@
 # Copart UMG Subastas
 
-Aplicacion web para el segundo parcial de Desarrollo y Diseño Web. Implementa una plataforma de subastas de vehiculos en tiempo real con frontend desacoplado, API REST, SQL Server y Socket.IO.
+Aplicación web para el segundo parcial de Desarrollo y Diseño Web. Implementa una plataforma de subastas de vehículos en tiempo real con frontend desacoplado, API REST, SQL Server y Socket.IO.
+
+## Enlaces de entrega
+
+- Sitio publicado: https://parcial2-desarrolloweb-1.onrender.com/#/
+- API publicada: https://parcial2-desarrolloweb-t6jd.onrender.com
+- Salud de API: https://parcial2-desarrolloweb-t6jd.onrender.com/health
 
 ## Estructura
 
@@ -12,21 +18,21 @@ Parcial2-DesarrolloWeb/
 
 ## Funcionalidades cubiertas
 
-- Registro e inicio de sesion.
+- Registro e inicio de sesión.
 - Visitantes pueden ver el inventario en modo lectura.
-- Solo usuarios autenticados pueden publicar vehiculos y pujar.
-- Publicacion de vehiculos con ficha tecnica completa.
-- Galeria de al menos 5 fotografias por vehiculo.
+- Solo usuarios autenticados pueden publicar vehículos y pujar.
+- Publicación de vehículos con ficha técnica completa.
+- Galería de al menos 5 fotografías por vehículo.
 - Estados de daño Verde, Amarillo y Rojo.
 - Inventario con filtros por marca, modelo, año, combustible y daño.
-- Detalle de subasta con carrusel de imagenes.
+- Detalle de subasta con carrusel de imágenes.
 - Reglas de puja validadas en servidor:
   - oferta mayor o igual al monto base si no hay pujas;
   - oferta mayor a la actual;
-  - incremento minimo de 10%;
+  - incremento mínimo de 10%;
   - respeto de fecha/hora de inicio y cierre.
-- Pujas e indicadores en tiempo real sin refrescar la pagina.
-- Postores anonimos.
+- Pujas e indicadores en tiempo real sin refrescar la página.
+- Postores anónimos.
 - Indicador de "Vas ganando" y "Tu oferta ha sido superada".
 
 ## Usuarios de prueba

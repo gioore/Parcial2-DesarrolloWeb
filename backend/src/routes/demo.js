@@ -34,7 +34,7 @@ function authenticate(req) {
 
 function requireDemoAuth(req, res, next) {
   const user = authenticate(req);
-  if (!user) return res.status(401).json({ message: "Debe iniciar sesion." });
+  if (!user) return res.status(401).json({ message: "Debe iniciar sesión." });
   req.user = user;
   return next();
 }
@@ -137,7 +137,7 @@ export function createDemoRouters(express, io) {
   });
 
   vehiclesRouter.post("/", requireDemoAuth, (req, res) => {
-    if (!Array.isArray(req.body.photos) || req.body.photos.filter(Boolean).length < 5) return res.status(400).json({ message: "Debe incluir al menos 5 fotografias por vehiculo." });
+    if (!Array.isArray(req.body.photos) || req.body.photos.filter(Boolean).length < 5) return res.status(400).json({ message: "Debe incluir al menos 5 fotografías por vehículo." });
     const vehicle = { ...req.body, id: nextVehicleId++, ownerId: req.user.id, year: Number(req.body.year), cylinders: Number(req.body.cylinders), basePrice: Number(req.body.basePrice), startsAt: new Date(req.body.startsAt), endsAt: new Date(req.body.endsAt), photos: req.body.photos.filter(Boolean) };
     vehicles.push(vehicle);
     res.status(201).json({ id: vehicle.id });
@@ -160,12 +160,12 @@ export function createDemoRouters(express, io) {
     const vehicle = vehicles.find((item) => item.id === Number(req.params.vehicleId));
     if (!vehicle) return res.status(404).json({ message: "Vehiculo no encontrado." });
     const now = Date.now();
-    if (now < new Date(vehicle.startsAt).getTime()) return res.status(400).json({ message: "La subasta aun no ha iniciado." });
-    if (now > new Date(vehicle.endsAt).getTime()) return res.status(400).json({ message: "Oferta cerrada. La subasta ya termino." });
+    if (now < new Date(vehicle.startsAt).getTime()) return res.status(400).json({ message: "La subasta aún no ha iniciado." });
+    if (now > new Date(vehicle.endsAt).getTime()) return res.status(400).json({ message: "Oferta cerrada. La subasta ya terminó." });
     const amount = Number(req.body.amount);
     const current = withAuction(vehicle).currentBid;
     const minimum = current ? current * 1.1 : vehicle.basePrice;
-    if (!Number.isFinite(amount) || amount < minimum) return res.status(400).json({ message: `La oferta minima es Q. ${minimum.toFixed(2)}.` });
+    if (!Number.isFinite(amount) || amount < minimum) return res.status(400).json({ message: `La oferta mínima es Q. ${minimum.toFixed(2)}.` });
     const bid = { id: nextBidId++, vehicleId: vehicle.id, userId: req.user.id, amount, createdAt: new Date() };
     bids.push(bid);
     const publicBid = { id: bid.id, vehicleId: bid.vehicleId, amount: bid.amount, createdAt: bid.createdAt };

@@ -11,7 +11,7 @@ export function createBidsRouter(io) {
       const vehicleId = Number(req.params.vehicleId);
       const amount = Number(req.body.amount);
       if (!Number.isFinite(amount)) {
-        return res.status(400).json({ message: "Ingrese un monto valido." });
+        return res.status(400).json({ message: "Ingrese un monto válido." });
       }
 
       const pool = await getPool();
@@ -42,12 +42,12 @@ export function createBidsRouter(io) {
       if (now < new Date(vehicle.startsAt).getTime()) {
         await transaction.rollback();
         transaction = null;
-        return res.status(400).json({ message: "La subasta aun no ha iniciado." });
+        return res.status(400).json({ message: "La subasta aún no ha iniciado." });
       }
       if (now > new Date(vehicle.endsAt).getTime()) {
         await transaction.rollback();
         transaction = null;
-        return res.status(400).json({ message: "Oferta cerrada. La subasta ya termino." });
+        return res.status(400).json({ message: "Oferta cerrada. La subasta ya terminó." });
       }
 
       const currentBid = vehicle.currentBid === null ? null : Number(vehicle.currentBid);
@@ -59,7 +59,7 @@ export function createBidsRouter(io) {
           message:
             currentBid === null
               ? `La oferta debe ser igual o mayor al monto base Q. ${Number(vehicle.basePrice).toFixed(2)}.`
-              : `La oferta debe superar la puja actual por al menos 10%. Minimo: Q. ${minimum.toFixed(2)}.`
+              : `La oferta debe superar la puja actual por al menos 10%. Mínimo: Q. ${minimum.toFixed(2)}.`
         });
       }
 

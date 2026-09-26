@@ -52,8 +52,8 @@ export function PublishPage({ vehicleId }) {
   if (!user) {
     return (
       <section className="page narrow">
-        <h1>Publicar vehiculo</h1>
-        <p className="error">Debe iniciar sesion para publicar o editar vehiculos.</p>
+        <h1>Publicar vehículo</h1>
+        <p className="error">Debe iniciar sesión para publicar o editar vehículos.</p>
       </section>
     );
   }
@@ -83,7 +83,7 @@ export function PublishPage({ vehicleId }) {
       };
       if (vehicleId) {
         await api(`/api/vehicles/${vehicleId}`, { method: "PUT", body: JSON.stringify(payload) });
-        setMessage("Publicacion actualizada.");
+        setMessage("Publicación actualizada.");
       } else {
         const data = await api("/api/vehicles", { method: "POST", body: JSON.stringify(payload) });
         window.location.hash = `#/vehiculos/${data.id}`;
@@ -97,21 +97,21 @@ export function PublishPage({ vehicleId }) {
     <section className="page">
       <div className="page-heading">
         <div>
-          <p className="eyebrow">{vehicleId ? "Editar publicacion" : "Nueva publicacion"}</p>
-          <h1>{vehicleId ? "Actualizar vehiculo" : "Publicar vehiculo"}</h1>
-          <p className="muted">Completa ficha tecnica, subasta y al menos 5 fotografias.</p>
+          <p className="eyebrow">{vehicleId ? "Editar publicación" : "Nueva publicación"}</p>
+          <h1>{vehicleId ? "Actualizar vehículo" : "Publicar vehículo"}</h1>
+          <p className="muted">Completa ficha técnica, subasta y al menos 5 fotografías.</p>
         </div>
       </div>
 
       <form className="publish-form" onSubmit={submit}>
         <div className="form-section">
-          <h2>Ficha tecnica</h2>
+          <h2>Ficha técnica</h2>
           <label>Año<input type="number" value={form.year} onChange={(e) => update("year", e.target.value)} required /></label>
-          <label>Tipo de articulo<input value={form.articleType} onChange={(e) => update("articleType", e.target.value)} required /></label>
+          <label>Tipo de artículo<input value={form.articleType} onChange={(e) => update("articleType", e.target.value)} required /></label>
           <label>Marca<input value={form.brand} onChange={(e) => update("brand", e.target.value)} required /></label>
           <label>Modelo<input value={form.model} onChange={(e) => update("model", e.target.value)} required /></label>
           <label>Motor<input value={form.engine} onChange={(e) => update("engine", e.target.value)} required /></label>
-          <label>Transmision<input value={form.transmission} onChange={(e) => update("transmission", e.target.value)} required /></label>
+          <label>Transmisión<input value={form.transmission} onChange={(e) => update("transmission", e.target.value)} required /></label>
           <label>Combustible<input value={form.fuelType} onChange={(e) => update("fuelType", e.target.value)} required /></label>
           <label>Tren de manejo<select value={form.drivetrain} onChange={(e) => update("drivetrain", e.target.value)}><option>FWD</option><option>RWD</option><option>AWD</option><option>4WD</option></select></label>
           <label>Cilindros<input type="number" value={form.cylinders} onChange={(e) => update("cylinders", e.target.value)} required /></label>
@@ -126,7 +126,7 @@ export function PublishPage({ vehicleId }) {
         </div>
 
         <div className="form-section photos-section">
-          <h2>Galeria fotografica</h2>
+          <h2>Galería fotográfica</h2>
           {form.photos.map((photo, index) => (
             <label key={index}>Foto {index + 1}<input value={photo} onChange={(e) => updatePhoto(index, e.target.value)} required={index < 5} placeholder="https://..." /></label>
           ))}
@@ -135,7 +135,7 @@ export function PublishPage({ vehicleId }) {
 
         {error && <p className="error">{error}</p>}
         {message && <p className="success">{message}</p>}
-        <button className="primary-button"><Save size={18} /> Guardar publicacion</button>
+        <button className="primary-button"><Save size={18} /> Guardar publicación</button>
       </form>
     </section>
   );

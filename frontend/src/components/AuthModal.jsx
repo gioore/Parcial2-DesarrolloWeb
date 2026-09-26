@@ -1,12 +1,22 @@
 import { X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../state/AuthContext";
 
-export function AuthModal({ onClose }) {
-  const [mode, setMode] = useState("login");
+export function AuthModal({ initialMode = "login", onClose }) {
+  const [mode, setMode] = useState(initialMode);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { login, register } = useAuth();
+
+  useEffect(() => {
+    setMode(initialMode);
+    setError("");
+  }, [initialMode]);
+
+  function switchMode(nextMode) {
+    setMode(nextMode);
+    setError("");
+  }
 
   async function submit(event) {
     event.preventDefault();
@@ -31,12 +41,12 @@ export function AuthModal({ onClose }) {
   return (
     <div className="modal-backdrop">
       <section className="modal-card">
-        <button className="icon-button modal-close" onClick={onClose} title="Cerrar">
+        <button className="icon-button modal-close" onClick={onClose} title="Cerrar" aria-label="Cerrar">
           <X size={18} />
         </button>
-        <h2>{mode === "login" ? "Iniciar sesion" : "Crear cuenta"}</h2>
+        <h2>{mode === "login" ? "Iniciar sesión" : "Crear cuenta"}</h2>
         <p className="muted">
-          Para publicar o pujar debes iniciar sesion. El inventario queda visible para visitantes.
+          Para publicar o pujar debes iniciar sesión. El inventario queda visible para visitantes.
         </p>
         <form className="form-grid" onSubmit={submit}>
           {mode === "register" && (
@@ -50,7 +60,7 @@ export function AuthModal({ onClose }) {
                 <input name="lastName" required />
               </label>
               <label>
-                Telefono
+                Teléfono
                 <input name="phone" required />
               </label>
             </>
@@ -68,7 +78,7 @@ export function AuthModal({ onClose }) {
             {loading ? "Validando..." : mode === "login" ? "Entrar" : "Registrarme"}
           </button>
         </form>
-        <button className="link-button" onClick={() => setMode(mode === "login" ? "register" : "login")}>
+        <button className="link-button" onClick={() => switchMode(mode === "login" ? "register" : "login")}>
           {mode === "login" ? "Crear una cuenta nueva" : "Ya tengo cuenta"}
         </button>
       </section>

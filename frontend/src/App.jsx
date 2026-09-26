@@ -18,8 +18,19 @@ export function App() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
+  useEffect(() => {
+    if (route === "#/login" || route === "#/registro") {
+      setShowAuth(true);
+    }
+  }, [route]);
+
   function navigate(hash) {
     window.location.hash = hash;
+  }
+
+  function closeAuth() {
+    setShowAuth(false);
+    if (route === "#/login" || route === "#/registro") navigate("#/");
   }
 
   const detailMatch = route.match(/^#\/vehiculos\/(\d+)/);
@@ -57,7 +68,7 @@ export function App() {
             </button>
           ) : (
             <button className="primary-button" onClick={() => setShowAuth(true)}>
-              Iniciar sesion
+              Iniciar sesión
             </button>
           )}
         </nav>
@@ -77,7 +88,7 @@ export function App() {
         )}
       </main>
 
-      {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
+      {showAuth && <AuthModal initialMode={route === "#/registro" ? "register" : "login"} onClose={closeAuth} />}
     </div>
   );
 }

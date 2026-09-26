@@ -176,7 +176,7 @@ vehiclesRouter.get("/:id", optionalAuth, async (req, res, next) => {
       `);
 
     const vehicle = result.recordset[0];
-    if (!vehicle) return res.status(404).json({ message: "Vehiculo no encontrado." });
+    if (!vehicle) return res.status(404).json({ message: "Vehículo no encontrado." });
     return res.json({ vehicle: mapVehicle(vehicle, req.user?.id) });
   } catch (error) {
     next(error);
@@ -202,7 +202,7 @@ function validateVehicle(body) {
   const missing = required.filter((key) => body[key] === undefined || body[key] === "");
   if (missing.length) return `Campos obligatorios faltantes: ${missing.join(", ")}.`;
   if (!Array.isArray(body.photos) || body.photos.filter(Boolean).length < 5) {
-    return "Debe incluir al menos 5 fotografias por vehiculo.";
+    return "Debe incluir al menos 5 fotografías por vehículo.";
   }
   if (!["Verde", "Amarillo", "Rojo"].includes(body.damageLevel)) {
     return "El nivel de daño debe ser Verde, Amarillo o Rojo.";

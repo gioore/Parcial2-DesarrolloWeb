@@ -17,7 +17,7 @@ export function MyVehiclesPage() {
   }, [user]);
 
   if (!user) {
-    return <section className="page narrow"><h1>Mis publicaciones</h1><p className="error">Debe iniciar sesion.</p></section>;
+    return <section className="page narrow"><h1>Mis publicaciones</h1><p className="error">Debe iniciar sesión.</p></section>;
   }
 
   return (
@@ -26,7 +26,7 @@ export function MyVehiclesPage() {
         <div>
           <p className="eyebrow">Proveedor / usuario</p>
           <h1>Mis publicaciones</h1>
-          <p className="muted">Busca y edita los vehiculos que publicaste.</p>
+          <p className="muted">Busca y edita los vehículos que publicaste.</p>
         </div>
       </div>
       {error && <p className="error">{error}</p>}
@@ -34,7 +34,7 @@ export function MyVehiclesPage() {
         {vehicles.map((vehicle) => (
           <div key={vehicle.id} className="owned-card">
             <VehicleCard vehicle={vehicle} />
-            <a className="ghost-button full" href={`#/editar/${vehicle.id}`}><Edit3 size={18} /> Editar publicacion</a>
+            <a className="ghost-button full" href={`#/editar/${vehicle.id}`}><Edit3 size={18} /> Editar publicación</a>
           </div>
         ))}
       </div>

@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import { api, getApiUrl } from "../api/client";
 import { Countdown } from "../components/Countdown";
 import { useAuth } from "../state/AuthContext";
+import { displayImageUrl } from "../utils/images";
 
 export function VehicleDetailPage({ vehicleId, openAuth }) {
   const { user } = useAuth();
@@ -13,11 +14,14 @@ export function VehicleDetailPage({ vehicleId, openAuth }) {
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
   const [myHighestBid, setMyHighestBid] = useState(0);
   const [isWinning, setIsWinning] = useState(false);
   const myHighestBidRef = useRef(0);
 
   async function load() {
+    setLoading(true);
+    setError("");
     const [vehicleData, bidData] = await Promise.all([
       api(`/api/vehicles/${vehicleId}`),
       api(`/api/bids/${vehicleId}`)
@@ -28,10 +32,15 @@ export function VehicleDetailPage({ vehicleId, openAuth }) {
     myHighestBidRef.current = highestMine;
     setMyHighestBid(highestMine);
     setIsWinning(Boolean(vehicleData.vehicle.isCurrentUserWinner));
+    setLoading(false);
   }
 
   useEffect(() => {
-    load().catch((err) => setError(err.message));
+    load().catch((err) => {
+      setVehicle(null);
+      setError(err.message);
+      setLoading(false);
+    });
   }, [vehicleId]);
 
   useEffect(() => {
@@ -55,6 +64,9 @@ export function VehicleDetailPage({ vehicleId, openAuth }) {
   }, [vehicle]);
   const winning = user && isWinning;
   const outbid = user && myHighestBid > 0 && !isWinning;
+  const now = Date.now();
+  const auctionPending = vehicle ? now < new Date(vehicle.startsAt).getTime() : false;
+  const auctionClosed = vehicle ? now > new Date(vehicle.endsAt).getTime() : false;
 
   async function submitBid(event) {
     event.preventDefault();
@@ -80,7 +92,12 @@ export function VehicleDetailPage({ vehicleId, openAuth }) {
   }
 
   if (!vehicle) {
-    return <section className="page"><p className="muted">Cargando detalle...</p>{error && <p className="error">{error}</p>}</section>;
+    return (
+      <section className="page">
+        {loading ? <p className="muted">Cargando detalle...</p> : null}
+        {error && <p className="error">{error}</p>}
+      </section>
+    );
   }
 
   return (
@@ -88,11 +105,11 @@ export function VehicleDetailPage({ vehicleId, openAuth }) {
       <a className="link-button" href="#/"><ArrowLeft size={18} /> Volver al inventario</a>
       <div className="detail-layout">
         <div className="gallery">
-          <img src={vehicle.photos[photoIndex]} alt={`${vehicle.brand} ${vehicle.model}`} />
+          <img src={displayImageUrl(vehicle.photos[photoIndex], 1200)} alt={`${vehicle.brand} ${vehicle.model}`} />
           <div className="thumb-row">
             {vehicle.photos.map((photo, index) => (
               <button className={index === photoIndex ? "active-thumb" : ""} key={photo} onClick={() => setPhotoIndex(index)}>
-                <img src={photo} alt={`Foto ${index + 1}`} />
+                <img src={displayImageUrl(photo, 240)} alt={`Foto ${index + 1}`} loading="lazy" />
               </button>
             ))}
           </div>
@@ -103,17 +120,19 @@ export function VehicleDetailPage({ vehicleId, openAuth }) {
           <h1>{vehicle.brand} {vehicle.model}</h1>
           <div className={`status-banner ${winning ? "win" : outbid ? "lost" : ""}`}>
             {winning ? <BadgeCheck size={18} /> : <CircleAlert size={18} />}
-            {winning ? "¡Vas ganando esta subasta!" : outbid ? "Tu oferta ha sido superada. ¡Haz tu oferta ahora antes de que termine el tiempo!" : "Postores anonimos: solo se muestra el monto actual."}
+            {winning ? "¡Vas ganando esta subasta!" : outbid ? "Tu oferta ha sido superada. ¡Haz tu oferta ahora antes de que termine el tiempo!" : "Postores anónimos: solo se muestra el monto actual."}
           </div>
           <div className="price-box">
             <span>Oferta actual</span>
             <strong>Q. {currentBid.toLocaleString("es-GT", { minimumFractionDigits: 2 })}</strong>
-            <small>Minimo siguiente: Q. {minimum.toLocaleString("es-GT", { minimumFractionDigits: 2 })}</small>
+            <small>Mínimo siguiente: Q. {minimum.toLocaleString("es-GT", { minimumFractionDigits: 2 })}</small>
           </div>
           <Countdown startsAt={vehicle.startsAt} endsAt={vehicle.endsAt} />
           <form className="bid-form" onSubmit={submitBid}>
             <input type="number" step="0.01" min={minimum} value={amount} onChange={(event) => setAmount(event.target.value)} placeholder="Monto de oferta" />
-            <button className="primary-button"><Send size={18} /> Ofertar</button>
+            <button className="primary-button" disabled={auctionPending || auctionClosed}>
+              <Send size={18} /> {auctionClosed ? "Cerrada" : auctionPending ? "Pendiente" : "Ofertar"}
+            </button>
           </form>
           {message && <p className="success">{message}</p>}
           {error && <p className="error">{error}</p>}
@@ -123,7 +142,7 @@ export function VehicleDetailPage({ vehicleId, openAuth }) {
       <div className="info-grid">
         {[
           ["Motor", vehicle.engine],
-          ["Transmision", vehicle.transmission],
+          ["Transmisión", vehicle.transmission],
           ["Combustible", vehicle.fuelType],
           ["Tren de manejo", vehicle.drivetrain],
           ["Cilindros", vehicle.cylinders],
@@ -139,14 +158,14 @@ export function VehicleDetailPage({ vehicleId, openAuth }) {
       </div>
 
       <section>
-        <h2>Historial anonimo de pujas</h2>
+        <h2>Historial anónimo de pujas</h2>
         <div className="bid-list">
           {bids.length ? bids.map((bid) => (
             <div className="bid-item" key={bid.id}>
               <strong>Q. {bid.amount.toLocaleString("es-GT", { minimumFractionDigits: 2 })}</strong>
               <span>{new Date(bid.createdAt).toLocaleString()}</span>
             </div>
-          )) : <p className="muted">Aun no hay pujas.</p>}
+          )) : <p className="muted">Aún no hay pujas.</p>}
         </div>
       </section>
     </section>

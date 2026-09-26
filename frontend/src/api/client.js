@@ -38,7 +38,7 @@ export async function api(path, options = {}) {
 
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(data.message || "No se pudo completar la operacion.");
+    throw new Error(data.message || "No se pudo completar la operación.");
   }
   return data;
 }

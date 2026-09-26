@@ -6,7 +6,7 @@ export function requireAuth(req, res, next) {
   const token = header.startsWith("Bearer ") ? header.slice(7) : null;
 
   if (!token) {
-    return res.status(401).json({ message: "Debe iniciar sesion." });
+    return res.status(401).json({ message: "Debe iniciar sesión." });
   }
 
   try {
